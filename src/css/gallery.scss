@@ -1,0 +1,50 @@
+$img-max-width: 200px;
+
+.gallery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__photos {
+    display: flex;
+    flex-wrap: wrap;
+
+    &--thumbnail {
+      display: block;
+      margin: 2px;
+      flex: 1 0 19%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+  }
+
+  &__pagination {
+    width: auto;
+    display: flex;
+
+    &--button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 100%;
+      font-size: 1rem;
+      background: #dedede;
+      color: #000;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:not(:first-of-type) {
+        margin-left: 0.5rem;
+      }
+
+      &.selected {
+        background: #c0ffee;
+      }
+    }
+  }
+}
