@@ -4,10 +4,12 @@ const buildInitialGallery = (galleryData => {
   clearGallery()
   clearPagination()
 
-  const numPhotos = galleryData.per_page
+  const numPhotos = galleryData.photos.length
+  const perPage = 10
+  const pages = Math.ceil(numPhotos / perPage)
   const photos = galleryData.photos
-  const pages = 5
-  const perPage = numPhotos / pages
+
+  console.log(pages)
 
   buildPagination(photos, perPage, pages)
   buildPage(photos, perPage, 1)
