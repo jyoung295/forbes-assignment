@@ -17,14 +17,16 @@ const buildInitialGallery = (galleryData => {
 const buildPage = (photos, perPage, page) => {
   clearGallery()
 
-  const sliceStart = (page - 1) * perPage
-  const sliceEnd = sliceStart + perPage
+  // determine which images to include on the "page"
+  const sliceStart = (page - 1) * perPage // first image on the page
+  const sliceEnd = sliceStart + perPage   // last image on the page
 
+  // grab subsect of original photos array to represent current page
   const pageToPrint = photos.slice(sliceStart, sliceEnd)
-  console.log(pageToPrint)
 
   const photosContainer = document.querySelector('.gallery__photos')
 
+  // create elements for each photo thumbnail and corresponding modal for the page
   pageToPrint.forEach(photo => {
     // get info needed for thumbnails in the gallery
     let photoThumb = photo.src.tiny
@@ -78,6 +80,7 @@ const buildPage = (photos, perPage, page) => {
     photosContainer.appendChild(photoModal)
   });
 
+  // when page is built update which pagination button is set to selected style
   const previousPage = document.querySelector('.gallery__pagination--button.selected')
   const selectedPage = document.querySelector(`.gallery__pagination--button[data-page="${page}"]`)
   previousPage?.classList.remove('selected')
@@ -126,12 +129,15 @@ const clearPagination = () => {
 const handleModalOpen = (e) => {
   e.preventDefault()
 
+  // get the correct modal corresponding to the thumbnail that was clicked
   const photoId = e.target.id
   const modalToOpen = document.querySelector(`.gallery__photos--modal[data-id="${photoId}"]`)
 
+  // add that open styles to the modal
   modalToOpen.classList.add("open")
 }
 
+// remove the open style from the currently open modal
 const handleModalClose = (e) => {
   e.target.parentElement.classList.remove("open")
 }
