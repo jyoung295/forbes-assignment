@@ -39,19 +39,27 @@ const buildPage = (photos, perPage, page) => {
     let photoCreditLink = photo.photographer_url
 
     // build the img element for the gallery.
+    let thumbnailButton = document.createElement('button')
     let photoElement = document.createElement('img')
+
+    thumbnailButton.appendChild(photoElement)
+    thumbnailButton.setAttribute('aria-controls', `${photoId}-modal`)
+    thumbnailButton.classList.add('gallery__photos--thumbnail')
+    thumbnailButton.addEventListener('click', handleModalOpen)
+
     photoElement.src = photoThumb
     photoElement.alt = photoAlt
     photoElement.id  = photoId
     photoElement.loading  = "lazy"
-    photoElement.classList.add('gallery__photos--thumbnail')
-    photoElement.addEventListener('click', handleModalOpen)
 
 
     // build the modal element, add the image, photo credit, and close button
     let photoModal = document.createElement('div')
     photoModal.classList.add('gallery__photos--modal')
     photoModal.setAttribute('data-id', photoId)
+    photoModal.setAttribute('aria-hidden', "true")
+    photoModal.setAttribute('aria-modal', "true")
+    photoModal.id = `${photoId}-modal`
 
     let photoModalImg = document.createElement('img')
     photoModalImg.src = photoLarge
@@ -69,6 +77,7 @@ const buildPage = (photos, perPage, page) => {
     photoModalClose.innerText = "x"
     photoModalClose.classList.add('gallery__photos--modal-close')
     photoModalClose.addEventListener('click', handleModalClose)
+    photoModalClose.setAttribute('aria-controls', `${photoId}-modal`)
 
     photoModal.appendChild(photoModalImg)
     photoModal.appendChild(photoModalCredit)
@@ -76,7 +85,7 @@ const buildPage = (photos, perPage, page) => {
 
 
     // add the image to the grid then add the corresponding modal.
-    photosContainer.appendChild(photoElement)
+    photosContainer.appendChild(thumbnailButton)
     photosContainer.appendChild(photoModal)
   });
 
@@ -135,11 +144,13 @@ const handleModalOpen = (e) => {
 
   // add that open styles to the modal
   modalToOpen.classList.add("open")
+  modalToOpen.setAttribute('aria-hidden', "false")
 }
 
 // remove the open style from the currently open modal
 const handleModalClose = (e) => {
   e.target.parentElement.classList.remove("open")
+  e.target.parentElement.setAttribute('aria-hidden', "true")
 }
 
 export {buildInitialGallery, clearGallery, clearPagination}
