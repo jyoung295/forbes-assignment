@@ -18,12 +18,17 @@ module.exports = {
       {
         test: /\.(s(a|c)ss)$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ]
   },
   output: {
     filename: 'js/main.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[name]'
   },
   plugins: [
     new HtmlWebpackPlugin({

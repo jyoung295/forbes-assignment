@@ -1,5 +1,5 @@
 import { handleSearch } from "./js/get-gallery"
-import { buildInitialGallery, clearGallery } from "./js/build-gallery"
+import { buildInitialGallery } from "./js/build-gallery"
 
 // add search box event listeners
 const searchButton = document.querySelector('.search--button')

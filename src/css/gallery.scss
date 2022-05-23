@@ -10,12 +10,91 @@ $img-max-width: 200px;
     display: flex;
     flex-wrap: wrap;
 
+    &--loading {
+      width: 200px;
+      height: 200px;
+    }
+
     &--thumbnail {
       display: block;
-      margin: 2px;
+      margin: 8px;
       flex: 1 0 19%;
-      padding: 5px;
       box-sizing: border-box;
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.04);
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.27), 0 6px 6px rgba(0,0,0,0.37);
+      }
+    }
+
+    &--modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      background-color: rgba($color: #000000, $alpha: 0.85);
+
+      &.open {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &-image {
+        max-height: 625px;
+        max-width: 80%;
+        width: auto;
+        height: auto;
+        
+        margin-bottom: 1rem;
+      }
+
+      &-credit {
+        color: white;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.1rem;
+
+        &:after {
+          content: "\e89e";
+          font-family: 'Material Icons';
+          font-size: 0.75rem;
+          position: relative;
+          display: inline-block;
+          margin-left: 0.25rem;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &-close {
+        font-size: 4rem;
+        line-height: 1;
+        width: 4rem;
+        height: 4rem;
+        background: none;
+        color: white;
+        border: 2px solid white;
+        border-radius: 100%;
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        line-height: 0.01;
+        padding-bottom: 0.6rem;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
     }
   }
 
@@ -31,11 +110,14 @@ $img-max-width: 200px;
       height: 2rem;
       border-radius: 100%;
       font-size: 1rem;
-      background: #dedede;
+      background: #ededed;
       color: #000;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      transition: box-shadow 0.2s ease;
 
       &:hover {
         cursor: pointer;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
       }
 
       &:not(:first-of-type) {
@@ -43,7 +125,8 @@ $img-max-width: 200px;
       }
 
       &.selected {
-        background: #c0ffee;
+        background: #fff;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
       }
     }
   }
